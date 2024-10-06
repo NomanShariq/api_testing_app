@@ -1,5 +1,6 @@
 import 'package:check_api/home_screen.dart';
 import 'package:check_api/login_screen.dart';
+import 'package:check_api/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,10 +16,11 @@ class MyApp extends StatelessWidget {
       routes: {
         "/login": (context) => const LoginPage(),
         "/home": (context) => const HomeScreen(),
+        "/signup": (context) => const SignupScreen(),
       },
       theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: const SignupScreen(),
     );
   }
 }

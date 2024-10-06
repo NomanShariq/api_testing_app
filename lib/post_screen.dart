@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:intl/intl.dart';
+import 'package:velocity_x/velocity_x.dart'; // Add this import
 
 class PostsList extends StatelessWidget {
   const PostsList({super.key});
@@ -42,32 +44,74 @@ class PostsList extends StatelessWidget {
             itemCount: posts.length,
             itemBuilder: (context, index) {
               final post = posts[index];
-              // final id = post['id'] ?? 'No ID';
-              // final title = post['title'] ?? 'No Title';
+              final title = post['title'] ?? 'No Title';
               final summary = post['summary'] ?? 'No Summary';
-              // final coverImage = post['coverImage'] ?? '';
               final createdAt = post['createdAt'] ?? 'No Date';
               final updatedAt = post['updatedAt'] ?? 'No Date';
+
+              // Parse and format the dates
+              DateTime createdDateTime = DateTime.parse(createdAt);
+              // DateTime updatedDateTime = DateTime.parse(updatedAt);
+              String formattedCreatedAt = DateFormat('d MMMM y, HH:mm')
+                  .format(createdDateTime); // e.g., 31 August 2024, 12:11
+              // String formattedUpdatedAt = DateFormat('d MMMM y, HH:mm')
+              //     .format(updatedDateTime); // e.g., 31 August 2024, 12:35
+
               return Card(
                 margin: const EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.asset(
-                      "images/mountains.png",
-                      fit: BoxFit.fill,
-                      height: 300,
-                      width: 500,
-                    ),
                     ListTile(
-                      // title: Text('ID: $id\n$title'),
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            title,
+                            style: const TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              const SizedBox(width: 26.0),
+                              IconButton(
+                                icon: const Icon(Icons.edit),
+                                color: Colors.green,
+                                onPressed: () {},
+                              ),
+                              const SizedBox(width: 16.0),
+                              IconButton(
+                                icon: const Icon(Icons.delete),
+                                color: Colors.red,
+                                onPressed: () {},
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                       subtitle: Text(summary),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                          'Created At: $createdAt\nUpdated At: $updatedAt'),
+                      padding: const EdgeInsets.only(left: 17.0),
+                      child: Text(formattedCreatedAt),
+                      // Text('Updated At: $formattedUpdatedAt'),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Image.asset(
+                        "images/mountains.png",
+                        fit: BoxFit.fill,
+                        height: 300,
+                        width: 500,
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(right: 16, bottom: 15),
+                      child: Text("From: Noman"),
+                      // Text('Updated At: $formattedUpdatedAt'),
+                    ).objectCenterRight(),
                   ],
                 ),
               );

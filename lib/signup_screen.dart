@@ -1,19 +1,18 @@
 import 'package:check_api/home_screen.dart';
-import 'package:check_api/signup_screen.dart';
+import 'package:check_api/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
   State<StatefulWidget> createState() => _State();
 }
 
-class _State extends State<LoginPage> {
+class _State extends State<SignupScreen> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
-
-  bool _obscureText = true; // Control password visibility
+  bool _obscureText = true; // For toggling password visibility
 
   void validate() {
     if (formkey.currentState!.validate()) {
@@ -32,37 +31,11 @@ class _State extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // drawer: Drawer(
-      //   child: ListView(
-      //     padding: EdgeInsets.zero,
-      //     children: [
-      //       const DrawerHeader(
-      //         decoration: BoxDecoration(
-      //           color: Colors.white,
-      //         ),
-      //         child: Text('Drawer Header'),
-      //       ),
-      //       ListTile(
-      //         title: const Text('Item 1'),
-      //         onTap: () {},
-      //       ),
-      //       ListTile(
-      //         title: const Text('Item 2'),
-      //         onTap: () {},
-      //       ),
-      //     ],
-      //   ),
-      // ),
       appBar: AppBar(
         elevation: 0,
         iconTheme: const IconThemeData(
           size: 30,
         ),
-        title: Image.asset(
-          "images/mountains.png",
-          height: 100,
-          width: 250,
-        ).centered(),
       ),
       body: Container(
         margin: const EdgeInsets.only(top: 200),
@@ -79,18 +52,39 @@ class _State extends State<LoginPage> {
                   ).centered(),
                   const Padding(padding: EdgeInsets.only(top: 40)),
                   const Text(
-                    "Login.",
+                    "Sign Up.",
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ).objectCenterLeft(),
-                  const Padding(padding: EdgeInsets.only(top: 20)),
+                  const SizedBox(
+                    height: 8.0,
+                  ),
                   const Text(
-                    "If you have an account with us, please log in.",
+                    "Please create your Account Here.",
                     style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w400,
                         color: Colors.grey),
                   ).objectCenterLeft(),
-                  const Padding(padding: EdgeInsets.only(top: 40)),
+                  const Padding(padding: EdgeInsets.only(top: 35)),
+
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: "Username",
+                      hintText: "Enter Username",
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return ("*Required");
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  const SizedBox(
+                    height: 28.0,
+                  ),
+                  // Email Input Field
                   TextFormField(
                     decoration: const InputDecoration(
                       labelText: "Email",
@@ -108,6 +102,8 @@ class _State extends State<LoginPage> {
                   const SizedBox(
                     height: 28.0,
                   ),
+
+                  // Password Input Field with Toggle Visibility
                   TextFormField(
                     obscureText: _obscureText, // Control password visibility
                     decoration: InputDecoration(
@@ -148,7 +144,7 @@ class _State extends State<LoginPage> {
                         ),
                       ),
                       onPressed: () {
-                        // Validate form and navigate to HomeScreen if valid
+                        // Validate and navigate to HomeScreen if valid
                         if (formkey.currentState!.validate()) {
                           Navigator.push(
                             context,
@@ -159,43 +155,44 @@ class _State extends State<LoginPage> {
                         }
                       },
                       child: const Text(
-                        "Login",
+                        "Sign Up",
                         style: TextStyle(fontSize: 25, color: Colors.white),
                       ),
                     ),
                   ),
+
                   Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Don’t Have an Account? ",
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Already Have an Account? ",
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            // Navigate to Login Page
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginPage()));
+                          },
+                          child: const Text(
+                            "Login",
                             style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.grey),
+                                color: Color.fromARGB(255, 255, 0, 0)),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              // Navigate to Sign Up Page
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SignupScreen()));
-                            },
-                            child: const Text(
-                              "Sign Up",
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color.fromARGB(255, 255, 0, 0)),
-                            ),
-                          ),
-                        ],
-                      )),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
