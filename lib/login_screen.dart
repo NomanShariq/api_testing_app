@@ -58,11 +58,6 @@ class _State extends State<LoginPage> {
         iconTheme: const IconThemeData(
           size: 30,
         ),
-        title: Image.asset(
-          "images/mountains.png",
-          height: 100,
-          width: 250,
-        ).centered(),
       ),
       body: Container(
         margin: const EdgeInsets.only(top: 200),
@@ -73,9 +68,14 @@ class _State extends State<LoginPage> {
               key: formkey,
               child: Column(
                 children: <Widget>[
-                  const Text(
-                    "My Account",
-                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Image.asset(
+                      "images/logo.png",
+                      fit: BoxFit.fill,
+                      height: 50,
+                      width: 300,
+                    ),
                   ).centered(),
                   const Padding(padding: EdgeInsets.only(top: 40)),
                   const Text(
@@ -165,7 +165,7 @@ class _State extends State<LoginPage> {
                     ),
                   ),
                   Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
+                      padding: const EdgeInsets.only(top: 14.0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,

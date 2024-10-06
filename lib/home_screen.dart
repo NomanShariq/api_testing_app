@@ -1,5 +1,6 @@
 import 'package:check_api/post_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -27,9 +28,14 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 147, 76, 175),
-        title: const Center(
-          child: Text('Api Check App'),
+        backgroundColor: Colors.black,
+        title: Center(
+          child: Image.asset(
+            "images/logo.png",
+            fit: BoxFit.fill,
+            height: 50,
+            width: 200,
+          ).centered(),
         ),
         actions: [
           IconButton(

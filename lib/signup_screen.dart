@@ -46,9 +46,14 @@ class _State extends State<SignupScreen> {
               key: formkey,
               child: Column(
                 children: <Widget>[
-                  const Text(
-                    "My Account",
-                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Image.asset(
+                      "images/logo.png",
+                      fit: BoxFit.fill,
+                      height: 50,
+                      width: 300,
+                    ),
                   ).centered(),
                   const Padding(padding: EdgeInsets.only(top: 40)),
                   const Text(
@@ -162,7 +167,7 @@ class _State extends State<SignupScreen> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
+                    padding: const EdgeInsets.only(top: 14.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -10,7 +10,7 @@ class PostsList extends StatelessWidget {
   Future<List<dynamic>> fetchPosts() async {
     print('Fetching posts...');
     final response = await http.get(
-      Uri.parse('https://express-ts-rest-api.onrender.com/api/v1/posts'),
+      Uri.parse('Your Api Key'),
     );
 
     if (response.statusCode == 200) {
@@ -47,15 +47,11 @@ class PostsList extends StatelessWidget {
               final title = post['title'] ?? 'No Title';
               final summary = post['summary'] ?? 'No Summary';
               final createdAt = post['createdAt'] ?? 'No Date';
-              // final updatedAt = post['updatedAt'] ?? 'No Date';
 
               // Parse and format the dates
               DateTime createdDateTime = DateTime.parse(createdAt);
-              // DateTime updatedDateTime = DateTime.parse(updatedAt);
               String formattedCreatedAt = DateFormat('d MMMM y, HH:mm')
                   .format(createdDateTime); // e.g., 31 August 2024, 12:11
-              // String formattedUpdatedAt = DateFormat('d MMMM y, HH:mm')
-              //     .format(updatedDateTime); // e.g., 31 August 2024, 12:35
 
               return Card(
                 margin: const EdgeInsets.all(10),
@@ -69,26 +65,26 @@ class PostsList extends StatelessWidget {
                           Text(
                             title,
                             style: const TextStyle(
-                              fontSize: 25,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Row(
-                            children: [
-                              const SizedBox(width: 26.0),
-                              IconButton(
-                                icon: const Icon(Icons.edit),
-                                color: Colors.green,
-                                onPressed: () {},
-                              ),
-                              const SizedBox(width: 16.0),
-                              IconButton(
-                                icon: const Icon(Icons.delete),
-                                color: Colors.red,
-                                onPressed: () {},
-                              ),
-                            ],
-                          )
+                          const Padding(padding: EdgeInsets.only(left: 10)),
+                          IconButton(
+                            icon: const Icon(Icons.edit),
+                            color: Colors.green,
+                            onPressed: () {},
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.delete),
+                            color: Colors.red,
+                            onPressed: () {
+                              showDeleteConfirmationDialog(context, () {
+                                // Your delete logic here
+                                print("Item deleted");
+                              });
+                            },
+                          ),
                         ],
                       ),
                       subtitle: Text(summary),
@@ -96,12 +92,11 @@ class PostsList extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 17.0),
                       child: Text(formattedCreatedAt),
-                      // Text('Updated At: $formattedUpdatedAt'),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Image.asset(
-                        "images/mountains.png",
+                        "images/mountains.jpg",
                         fit: BoxFit.fill,
                         height: 300,
                         width: 500,
@@ -110,7 +105,6 @@ class PostsList extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.only(right: 16, bottom: 15),
                       child: Text("From: Noman"),
-                      // Text('Updated At: $formattedUpdatedAt'),
                     ).objectCenterRight(),
                   ],
                 ),
@@ -123,4 +117,35 @@ class PostsList extends StatelessWidget {
       },
     );
   }
+}
+
+void showDeleteConfirmationDialog(
+    BuildContext context, VoidCallback onConfirm) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text("Delete Confirmation"),
+        content: const Text("Are you sure you want to delete this item?"),
+        actions: [
+          TextButton(
+            child: const Text("Cancel"),
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+          ),
+          ElevatedButton(
+            child: const Text("Delete"),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+            ),
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+              onConfirm(); // Perform the delete action
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
