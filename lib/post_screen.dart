@@ -8,7 +8,7 @@ class PostsList extends StatelessWidget {
   const PostsList({super.key});
 
   Future<List<dynamic>> fetchPosts() async {
-    print('Fetching posts...');
+    print('Fetching posts..');
     final response = await http.get(
       Uri.parse('Your Api Key'),
     );
