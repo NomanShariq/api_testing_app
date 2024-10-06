@@ -47,7 +47,7 @@ class PostsList extends StatelessWidget {
               final title = post['title'] ?? 'No Title';
               final summary = post['summary'] ?? 'No Summary';
               final createdAt = post['createdAt'] ?? 'No Date';
-              final updatedAt = post['updatedAt'] ?? 'No Date';
+              // final updatedAt = post['updatedAt'] ?? 'No Date';
 
               // Parse and format the dates
               DateTime createdDateTime = DateTime.parse(createdAt);
