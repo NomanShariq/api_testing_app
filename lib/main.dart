@@ -1,3 +1,4 @@
+import 'package:check_api/createpost_screen.dart';
 import 'package:check_api/home_screen.dart';
 import 'package:check_api/login_screen.dart';
 import 'package:check_api/signup_screen.dart';
@@ -17,10 +18,11 @@ class MyApp extends StatelessWidget {
         "/login": (context) => const LoginPage(),
         "/home": (context) => const HomeScreen(),
         "/signup": (context) => const SignupScreen(),
+        "/createpostscreen": (context) => const CreatePostScreen(),
       },
       theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
-      home: const SignupScreen(),
+      home: const HomeScreen(),
     );
   }
 }

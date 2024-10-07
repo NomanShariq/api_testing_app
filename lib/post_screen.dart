@@ -10,7 +10,8 @@ class PostsList extends StatelessWidget {
   Future<List<dynamic>> fetchPosts() async {
     print('Fetching posts..');
     final response = await http.get(
-      Uri.parse('Your Api Key'),
+      Uri.parse('https://express-ts-rest-api.onrender.com/api/v1/posts'),
+      // https://express-ts-rest-api.onrender.com/api/v1/posts
     );
 
     if (response.statusCode == 200) {
@@ -135,7 +136,6 @@ void showDeleteConfirmationDialog(
             },
           ),
           ElevatedButton(
-            child: const Text("Delete"),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,
             ),
@@ -143,6 +143,7 @@ void showDeleteConfirmationDialog(
               Navigator.of(context).pop(); // Close the dialog
               onConfirm(); // Perform the delete action
             },
+            child: const Text("Delete"),
           ),
         ],
       );

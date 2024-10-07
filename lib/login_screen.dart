@@ -90,7 +90,9 @@ class _State extends State<LoginPage> {
                         fontWeight: FontWeight.w400,
                         color: Colors.grey),
                   ).objectCenterLeft(),
-                  const Padding(padding: EdgeInsets.only(top: 40)),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 40),
+                  ),
                   TextFormField(
                     decoration: const InputDecoration(
                       labelText: "Email",
